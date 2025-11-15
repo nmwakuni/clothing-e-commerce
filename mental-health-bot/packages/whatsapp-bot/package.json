@@ -1,0 +1,17 @@
+{
+  "name": "@nafsi/whatsapp-bot",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@nafsi/database": "workspace:*",
+    "@nafsi/ai-counselor": "workspace:*",
+    "axios": "^1.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}
