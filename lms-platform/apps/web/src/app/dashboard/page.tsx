@@ -9,7 +9,17 @@ import { Progress } from '@lms/ui';
 import { Button } from '@lms/ui';
 import { Avatar } from '@lms/ui';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@lms/ui';
-import { BookOpen, Clock, Trophy, TrendingUp, Play, CheckCircle2, Award, Zap, Loader } from 'lucide-react';
+import {
+  BookOpen,
+  Clock,
+  Trophy,
+  TrendingUp,
+  Play,
+  CheckCircle2,
+  Award,
+  Zap,
+  Loader,
+} from 'lucide-react';
 import { authAPI, coursesAPI, isAuthenticated } from '@/lib/api';
 
 export default function DashboardPage() {
@@ -166,24 +176,29 @@ export default function DashboardPage() {
                   <p className="text-gray-600 mb-6">
                     Start your learning journey by enrolling in a course
                   </p>
-                  <Button onClick={() => router.push('/courses')}>
-                    Browse Courses
-                  </Button>
+                  <Button onClick={() => router.push('/courses')}>Browse Courses</Button>
                 </CardContent>
               </Card>
             ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {enrollments.map((enrollment) => (
-                  <Card key={enrollment.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <Card
+                    key={enrollment.id}
+                    className="overflow-hidden hover:shadow-lg transition-shadow"
+                  >
                     <img
-                      src={enrollment.course.thumbnailUrl || 'https://placehold.co/400x225/22c55e/white?text=Course'}
+                      src={
+                        enrollment.course.thumbnailUrl ||
+                        'https://placehold.co/400x225/22c55e/white?text=Course'
+                      }
                       alt={enrollment.course.title}
                       className="w-full h-48 object-cover"
                     />
                     <CardHeader>
                       <CardTitle>{enrollment.course.title}</CardTitle>
                       <CardDescription>
-                        {enrollment.lessonsCompleted || 0} of {enrollment.course.totalLessons} lessons completed
+                        {enrollment.lessonsCompleted || 0} of {enrollment.course.totalLessons}{' '}
+                        lessons completed
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -203,7 +218,9 @@ export default function DashboardPage() {
                       <div className="pt-2 border-t">
                         <p className="text-sm text-gray-600 mb-3">Next up:</p>
                         <div className="flex items-center justify-between">
-                          <span className="font-medium">{enrollment.nextLesson || 'Start course'}</span>
+                          <span className="font-medium">
+                            {enrollment.nextLesson || 'Start course'}
+                          </span>
                           <Button
                             size="sm"
                             onClick={() => router.push(`/courses/${enrollment.courseId}`)}
@@ -228,9 +245,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <p className="text-center text-gray-500 py-8">
-                    No recent activity to display
-                  </p>
+                  <p className="text-center text-gray-500 py-8">No recent activity to display</p>
                 </div>
               </CardContent>
             </Card>

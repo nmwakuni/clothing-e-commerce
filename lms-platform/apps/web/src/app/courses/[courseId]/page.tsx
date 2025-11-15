@@ -2,7 +2,17 @@
 
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Badge, Progress, Avatar } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Badge,
+  Progress,
+  Avatar,
+} from '@lms/ui';
 import { CourseReviews } from '@/components/course-reviews';
 import {
   Play,

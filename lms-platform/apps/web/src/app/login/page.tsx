@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, Alert } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Input,
+  Alert,
+} from '@lms/ui';
 import { Smartphone, Send, CheckCircle2, ArrowLeft, Loader } from 'lucide-react';
 import Link from 'next/link';
 
@@ -243,7 +252,10 @@ export default function LoginPage() {
         </Card>
 
         <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-gray-600 hover:text-green-600 inline-flex items-center gap-1">
+          <Link
+            href="/"
+            className="text-sm text-gray-600 hover:text-green-600 inline-flex items-center gap-1"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>

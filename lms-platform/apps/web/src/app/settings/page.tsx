@@ -3,7 +3,17 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Badge, Input, Alert } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Badge,
+  Input,
+  Alert,
+} from '@lms/ui';
 import { Bell, Lock, CreditCard, Globe, Shield, Smartphone, Mail, Zap } from 'lucide-react';
 import { isAuthenticated } from '@/lib/api';
 
@@ -84,7 +94,9 @@ export default function SettingsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">Daily Learning Reminder</p>
-                              <p className="text-sm text-gray-600">Get reminded to learn every day</p>
+                              <p className="text-sm text-gray-600">
+                                Get reminded to learn every day
+                              </p>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -106,7 +118,9 @@ export default function SettingsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">New Course Releases</p>
-                              <p className="text-sm text-gray-600">Be first to know about new courses</p>
+                              <p className="text-sm text-gray-600">
+                                Be first to know about new courses
+                              </p>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input type="checkbox" className="sr-only peer" />
@@ -126,7 +140,9 @@ export default function SettingsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">Weekly Progress Report</p>
-                              <p className="text-sm text-gray-600">Summary of your learning progress</p>
+                              <p className="text-sm text-gray-600">
+                                Summary of your learning progress
+                              </p>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -157,9 +173,7 @@ export default function SettingsPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle>Privacy & Security</CardTitle>
-                      <CardDescription>
-                        Manage your privacy and security settings
-                      </CardDescription>
+                      <CardDescription>Manage your privacy and security settings</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div>
@@ -168,7 +182,9 @@ export default function SettingsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">Public Profile</p>
-                              <p className="text-sm text-gray-600">Make your profile visible to others</p>
+                              <p className="text-sm text-gray-600">
+                                Make your profile visible to others
+                              </p>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -179,7 +195,9 @@ export default function SettingsPage() {
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">Show Learning Activity</p>
-                              <p className="text-sm text-gray-600">Display your course progress publicly</p>
+                              <p className="text-sm text-gray-600">
+                                Display your course progress publicly
+                              </p>
                             </div>
                             <label className="relative inline-flex items-center cursor-pointer">
                               <input type="checkbox" className="sr-only peer" />
@@ -209,7 +227,8 @@ export default function SettingsPage() {
                         <div>
                           <p className="font-bold text-sm">Your data is safe</p>
                           <p className="text-xs mt-1">
-                            We use industry-standard encryption to protect your data. We never share your personal information with third parties.
+                            We use industry-standard encryption to protect your data. We never share
+                            your personal information with third parties.
                           </p>
                         </div>
                       </Alert>
@@ -284,9 +303,7 @@ export default function SettingsPage() {
                   <Card>
                     <CardHeader>
                       <CardTitle>App Preferences</CardTitle>
-                      <CardDescription>
-                        Customize your learning experience
-                      </CardDescription>
+                      <CardDescription>Customize your learning experience</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-6">
                       <div>

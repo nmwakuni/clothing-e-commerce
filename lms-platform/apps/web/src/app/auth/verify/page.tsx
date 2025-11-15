@@ -192,10 +192,7 @@ export default function VerifyPage() {
                     <ArrowRight className="h-4 w-4" />
                   </Link>
 
-                  <Link
-                    href="/"
-                    className="text-gray-600 hover:text-green-600 text-sm"
-                  >
+                  <Link href="/" className="text-gray-600 hover:text-green-600 text-sm">
                     Back to Home
                   </Link>
                 </div>

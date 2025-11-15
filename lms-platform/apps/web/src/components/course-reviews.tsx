@@ -1,7 +1,18 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Avatar, Badge, Progress, Input } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Avatar,
+  Badge,
+  Progress,
+  Input,
+} from '@lms/ui';
 import { Star, ThumbsUp, MessageCircle, Filter, CheckCircle } from 'lucide-react';
 import { isAuthenticated, getCurrentUser } from '@/lib/api';
 
@@ -25,13 +36,19 @@ interface CourseReviewsProps {
   enrolled?: boolean;
 }
 
-export function CourseReviews({ courseId, averageRating, totalReviews, enrolled = false }: CourseReviewsProps) {
+export function CourseReviews({
+  courseId,
+  averageRating,
+  totalReviews,
+  enrolled = false,
+}: CourseReviewsProps) {
   const [reviews, setReviews] = useState<Review[]>([
     {
       id: '1',
       user: { name: 'John Kamau' },
       rating: 5,
-      comment: 'Amazing course! Sarah explains everything so clearly. I went from zero coding knowledge to building my own websites in just 3 weeks. The WhatsApp support is brilliant!',
+      comment:
+        'Amazing course! Sarah explains everything so clearly. I went from zero coding knowledge to building my own websites in just 3 weeks. The WhatsApp support is brilliant!',
       date: '2024-01-15',
       helpful: 24,
       verified: true,
@@ -40,7 +57,8 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
       id: '2',
       user: { name: 'Grace Wanjiku' },
       rating: 5,
-      comment: 'The WhatsApp integration is brilliant. I could learn during my commute on the matatu. Best investment I made this year! The AI tutor is super helpful.',
+      comment:
+        'The WhatsApp integration is brilliant. I could learn during my commute on the matatu. Best investment I made this year! The AI tutor is super helpful.',
       date: '2024-01-10',
       helpful: 18,
       verified: true,
@@ -49,7 +67,8 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
       id: '3',
       user: { name: 'David Omondi' },
       rating: 4,
-      comment: 'Great content and practical exercises. The M-Pesa payment was super smooth. I wish there were more advanced topics covered, but overall highly recommend!',
+      comment:
+        'Great content and practical exercises. The M-Pesa payment was super smooth. I wish there were more advanced topics covered, but overall highly recommend!',
       date: '2024-01-05',
       helpful: 12,
       verified: true,
@@ -58,7 +77,8 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
       id: '4',
       user: { name: 'Mary Chebet' },
       rating: 5,
-      comment: 'Perfect for beginners! The examples using Kenyan context (like building an M-Pesa calculator) made it so much easier to understand. Thank you!',
+      comment:
+        'Perfect for beginners! The examples using Kenyan context (like building an M-Pesa calculator) made it so much easier to understand. Thank you!',
       date: '2024-01-02',
       helpful: 9,
       verified: true,
@@ -115,9 +135,7 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
     setShowReviewForm(false);
   };
 
-  const filteredReviews = filterRating
-    ? reviews.filter((r) => r.rating === filterRating)
-    : reviews;
+  const filteredReviews = filterRating ? reviews.filter((r) => r.rating === filterRating) : reviews;
 
   const sortedReviews = [...filteredReviews].sort((a, b) => {
     if (sortBy === 'helpful') {
@@ -132,9 +150,7 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
       <Card>
         <CardHeader>
           <CardTitle>Student Reviews</CardTitle>
-          <CardDescription>
-            See what other students think about this course
-          </CardDescription>
+          <CardDescription>See what other students think about this course</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -200,9 +216,7 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Rating
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Your Rating</label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
@@ -223,9 +237,7 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Your Review
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Your Review</label>
               <textarea
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
@@ -249,7 +261,9 @@ export function CourseReviews({ courseId, averageRating, totalReviews, enrolled 
         <div className="flex items-center gap-2">
           <Filter className="h-4 w-4 text-gray-400" />
           <span className="text-sm text-gray-600">
-            {filterRating ? `Showing ${filterRating}-star reviews` : `All reviews (${reviews.length})`}
+            {filterRating
+              ? `Showing ${filterRating}-star reviews`
+              : `All reviews (${reviews.length})`}
           </span>
           {filterRating && (
             <button

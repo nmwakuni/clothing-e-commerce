@@ -222,12 +222,7 @@ Hint: Use classes like .card, .amount, .status`,
       {
         id: 'q1',
         question: 'Which property defines a grid container?',
-        options: [
-          'display: grid;',
-          'grid-container: true;',
-          'layout: grid;',
-          'container: grid;',
-        ],
+        options: ['display: grid;', 'grid-container: true;', 'layout: grid;', 'container: grid;'],
         correctAnswer: 0,
         explanation: 'display: grid; is the correct property to create a grid container.',
       },
@@ -241,12 +236,12 @@ Hint: Use classes like .card, .amount, .status`,
           'grid-layout: 3-columns;',
         ],
         correctAnswer: 1,
-        explanation:
-          'grid-template-columns: 1fr 1fr 1fr; creates 3 equal fractional columns.',
+        explanation: 'grid-template-columns: 1fr 1fr 1fr; creates 3 equal fractional columns.',
       },
       {
         id: 'q3',
-        question: 'In the context of a matatu sacco layout, if you want to display routes in a 3-column grid, which is the best approach?',
+        question:
+          'In the context of a matatu sacco layout, if you want to display routes in a 3-column grid, which is the best approach?',
         options: [
           'Use tables',
           'Use CSS Grid with grid-template-columns: repeat(3, 1fr);',
@@ -270,8 +265,12 @@ export default function LessonPage() {
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [aiChatOpen, setAiChatOpen] = useState(false);
-  const [currentLesson, setCurrentLesson] = useState(lessonContent[lessonId as keyof typeof lessonContent]);
-  const [userCode, setUserCode] = useState(currentLesson?.type === 'interactive' ? currentLesson.starterCode : '');
+  const [currentLesson, setCurrentLesson] = useState(
+    lessonContent[lessonId as keyof typeof lessonContent]
+  );
+  const [userCode, setUserCode] = useState(
+    currentLesson?.type === 'interactive' ? currentLesson.starterCode : ''
+  );
   const [showSolution, setShowSolution] = useState(false);
   const [quizAnswers, setQuizAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -287,7 +286,8 @@ export default function LessonPage() {
   const currentLessonIndex = lessons.findIndex((l) => l.id === lessonId);
   const currentLessonData = lessons[currentLessonIndex];
   const previousLesson = currentLessonIndex > 0 ? lessons[currentLessonIndex - 1] : null;
-  const nextLesson = currentLessonIndex < lessons.length - 1 ? lessons[currentLessonIndex + 1] : null;
+  const nextLesson =
+    currentLessonIndex < lessons.length - 1 ? lessons[currentLessonIndex + 1] : null;
 
   const handleNavigateLesson = (targetLessonId: string) => {
     router.push(`/courses/${courseId}/lessons/${targetLessonId}`);
@@ -387,7 +387,10 @@ export default function LessonPage() {
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-sm truncate">{lesson.title}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <Badge variant={lesson.type === 'video' ? 'default' : 'outline'} className="text-xs">
+                    <Badge
+                      variant={lesson.type === 'video' ? 'default' : 'outline'}
+                      className="text-xs"
+                    >
                       {lesson.type}
                     </Badge>
                     <span className="text-xs text-gray-500 flex items-center gap-1">
@@ -446,11 +449,7 @@ export default function LessonPage() {
               <Card>
                 <CardContent className="p-0">
                   <div className="relative bg-black aspect-video">
-                    <video
-                      controls
-                      className="w-full h-full"
-                      src={currentLesson.videoUrl}
-                    >
+                    <video controls className="w-full h-full" src={currentLesson.videoUrl}>
                       Your browser does not support video playback.
                     </video>
                   </div>
@@ -487,9 +486,18 @@ export default function LessonPage() {
                         .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold mb-4">$1</h1>')
                         .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold mb-3 mt-6">$1</h2>')
                         .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold mb-2 mt-4">$1</h3>')
-                        .replace(/```css\n([\s\S]*?)```/gim, '<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>$1</code></pre>')
-                        .replace(/```([\s\S]*?)```/gim, '<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>$1</code></pre>')
-                        .replace(/`([^`]+)`/gim, '<code class="bg-gray-100 px-2 py-1 rounded text-sm">$1</code>')
+                        .replace(
+                          /```css\n([\s\S]*?)```/gim,
+                          '<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>$1</code></pre>'
+                        )
+                        .replace(
+                          /```([\s\S]*?)```/gim,
+                          '<pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>$1</code></pre>'
+                        )
+                        .replace(
+                          /`([^`]+)`/gim,
+                          '<code class="bg-gray-100 px-2 py-1 rounded text-sm">$1</code>'
+                        )
                         .replace(/\n\n/gim, '</p><p class="mb-4">'),
                     }}
                   />
@@ -515,7 +523,11 @@ export default function LessonPage() {
                       <div className="flex items-center justify-between">
                         <CardTitle className="text-lg">Code Editor</CardTitle>
                         <div className="flex gap-2">
-                          <Button size="sm" variant="outline" onClick={() => setShowSolution(!showSolution)}>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setShowSolution(!showSolution)}
+                          >
                             {showSolution ? 'Hide' : 'Show'} Solution
                           </Button>
                           <Button size="sm" onClick={handleRunCode}>
@@ -585,11 +597,11 @@ export default function LessonPage() {
                                   ? isCorrectAnswer
                                     ? 'border-green-500 bg-green-50'
                                     : isSelected
-                                    ? 'border-red-500 bg-red-50'
-                                    : 'border-gray-200'
+                                      ? 'border-red-500 bg-red-50'
+                                      : 'border-gray-200'
                                   : isSelected
-                                  ? 'border-green-500 bg-green-50'
-                                  : 'border-gray-200 hover:border-green-300'
+                                    ? 'border-green-500 bg-green-50'
+                                    : 'border-gray-200 hover:border-green-300'
                               }`}
                             >
                               <div className="flex items-center gap-3">
@@ -599,11 +611,11 @@ export default function LessonPage() {
                                       ? isCorrectAnswer
                                         ? 'border-green-500 bg-green-500'
                                         : isSelected
-                                        ? 'border-red-500 bg-red-500'
-                                        : 'border-gray-300'
+                                          ? 'border-red-500 bg-red-500'
+                                          : 'border-gray-300'
                                       : isSelected
-                                      ? 'border-green-500 bg-green-500'
-                                      : 'border-gray-300'
+                                        ? 'border-green-500 bg-green-500'
+                                        : 'border-gray-300'
                                   }`}
                                 >
                                   {quizSubmitted && isCorrectAnswer && (
@@ -641,9 +653,7 @@ export default function LessonPage() {
                   <Button
                     onClick={handleSubmitQuiz}
                     className="w-full"
-                    disabled={
-                      currentLesson.questions.length !== Object.keys(quizAnswers).length
-                    }
+                    disabled={currentLesson.questions.length !== Object.keys(quizAnswers).length}
                   >
                     Submit Quiz
                   </Button>
@@ -676,10 +686,7 @@ export default function LessonPage() {
           <div className="flex items-center justify-between max-w-5xl mx-auto">
             <div>
               {previousLesson ? (
-                <Button
-                  variant="outline"
-                  onClick={() => handleNavigateLesson(previousLesson.id)}
-                >
+                <Button variant="outline" onClick={() => handleNavigateLesson(previousLesson.id)}>
                   <ChevronLeft className="h-4 w-4 mr-2" />
                   Previous: {previousLesson.title}
                 </Button>
@@ -694,9 +701,7 @@ export default function LessonPage() {
                   <ChevronRight className="h-4 w-4 ml-2" />
                 </Button>
               ) : (
-                <Button onClick={() => router.push(`/courses/${courseId}`)}>
-                  Back to Course
-                </Button>
+                <Button onClick={() => router.push(`/courses/${courseId}`)}>Back to Course</Button>
               )}
             </div>
           </div>

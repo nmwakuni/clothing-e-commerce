@@ -3,7 +3,15 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Badge, Progress } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Badge,
+  Progress,
+} from '@lms/ui';
 import {
   TrendingUp,
   Clock,
@@ -226,7 +234,9 @@ export default function AnalyticsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-gray-600 mb-1">XP Earned</p>
-                  <p className="text-3xl font-bold">{analytics.overview.xpEarned.toLocaleString()}</p>
+                  <p className="text-3xl font-bold">
+                    {analytics.overview.xpEarned.toLocaleString()}
+                  </p>
                 </div>
                 <div className="bg-purple-100 p-3 rounded-full">
                   <Award className="h-6 w-6 text-purple-600" />
@@ -338,10 +348,7 @@ export default function AnalyticsPage() {
                       <Badge variant="outline">{skill.xp} XP</Badge>
                     </div>
                     <div className="relative">
-                      <Progress
-                        value={(skill.xp / skill.nextLevelXp) * 100}
-                        showLabel={false}
-                      />
+                      <Progress value={(skill.xp / skill.nextLevelXp) * 100} showLabel={false} />
                       <p className="text-xs text-gray-500 mt-1">
                         {skill.nextLevelXp - skill.xp} XP to level {skill.level + 1}
                       </p>
@@ -397,7 +404,8 @@ export default function AnalyticsPage() {
               <div className="p-4 bg-blue-50 rounded-lg">
                 <h4 className="font-bold mb-2">🎯 Best Learning Time</h4>
                 <p className="text-sm text-gray-700">
-                  You're most productive on Saturdays between 9-11 AM. Schedule challenging lessons during this time.
+                  You're most productive on Saturdays between 9-11 AM. Schedule challenging lessons
+                  during this time.
                 </p>
               </div>
               <div className="p-4 bg-purple-50 rounded-lg">

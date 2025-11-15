@@ -43,9 +43,7 @@ export function Navigation() {
             <Link
               href="/courses"
               className={`text-sm font-medium transition-colors ${
-                isActivePath('/courses')
-                  ? 'text-green-600'
-                  : 'text-gray-700 hover:text-green-600'
+                isActivePath('/courses') ? 'text-green-600' : 'text-gray-700 hover:text-green-600'
               }`}
             >
               Courses
@@ -104,10 +102,7 @@ export function Navigation() {
 
                   {userMenuOpen && (
                     <>
-                      <div
-                        className="fixed inset-0 z-10"
-                        onClick={() => setUserMenuOpen(false)}
-                      />
+                      <div className="fixed inset-0 z-10" onClick={() => setUserMenuOpen(false)} />
                       <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border z-20 py-2">
                         <div className="px-4 py-3 border-b">
                           <p className="font-medium">{user?.fullName || 'Student'}</p>
@@ -116,9 +111,7 @@ export function Navigation() {
                             <Badge variant="success" className="text-xs">
                               {user?.subscriptionTier || 'Free'}
                             </Badge>
-                            <span className="text-xs text-gray-600">
-                              {user?.xpPoints || 0} XP
-                            </span>
+                            <span className="text-xs text-gray-600">{user?.xpPoints || 0} XP</span>
                           </div>
                         </div>
 

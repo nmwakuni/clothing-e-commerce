@@ -3,7 +3,16 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Badge, Input } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Badge,
+  Input,
+} from '@lms/ui';
 import {
   Plus,
   BookOpen,
@@ -235,7 +244,9 @@ export default function CreatorStudioPage() {
                 </div>
               </div>
               <div className="mt-4">
-                <Button variant="outline" size="sm">Request Payout</Button>
+                <Button variant="outline" size="sm">
+                  Request Payout
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -300,8 +311,8 @@ export default function CreatorStudioPage() {
                                 course.status === 'published'
                                   ? 'success'
                                   : course.status === 'draft'
-                                  ? 'outline'
-                                  : 'default'
+                                    ? 'outline'
+                                    : 'default'
                               }
                             >
                               {course.status}
@@ -310,7 +321,11 @@ export default function CreatorStudioPage() {
                           <p className="text-sm text-gray-600">{course.lessons} lessons</p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Button variant="outline" size="sm" onClick={() => handleEditCourse(course.id)}>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleEditCourse(course.id)}
+                          >
                             <Edit className="h-4 w-4 mr-1" />
                             Edit
                           </Button>
@@ -461,7 +476,10 @@ export default function CreatorStudioPage() {
                     { date: '2023-11-01', amount: 1450000, status: 'completed' },
                     { date: '2023-10-01', amount: 890000, status: 'completed' },
                   ].map((payout, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div>
                         <p className="font-medium">{formatCurrency(payout.amount)}</p>
                         <p className="text-sm text-gray-600">

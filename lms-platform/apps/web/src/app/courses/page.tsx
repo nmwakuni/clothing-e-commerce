@@ -3,7 +3,16 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Badge, Input } from '@lms/ui';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Badge,
+  Input,
+} from '@lms/ui';
 import { Search, Filter, Star, Users, Clock, BookOpen, TrendingUp } from 'lucide-react';
 import { coursesAPI } from '@/lib/api';
 
@@ -43,9 +52,10 @@ export default function CoursesPage() {
     }
   };
 
-  const filteredCourses = courses.filter((course) =>
-    course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    course.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredCourses = courses.filter(
+    (course) =>
+      course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      course.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const formatPrice = (amount: number) => {
@@ -170,7 +180,10 @@ export default function CoursesPage() {
                             : 'hover:bg-gray-50'
                         }`}
                       >
-                        {category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                        {category
+                          .split('-')
+                          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                          .join(' ')}
                       </button>
                     ))}
                   </div>
@@ -212,9 +225,7 @@ export default function CoursesPage() {
                 <CardContent className="p-12 text-center">
                   <BookOpen className="h-16 w-16 text-gray-300 mx-auto mb-4" />
                   <h3 className="text-xl font-bold mb-2">No courses found</h3>
-                  <p className="text-gray-600">
-                    Try adjusting your filters or search query
-                  </p>
+                  <p className="text-gray-600">Try adjusting your filters or search query</p>
                 </CardContent>
               </Card>
             ) : (
@@ -227,7 +238,10 @@ export default function CoursesPage() {
                   >
                     <div className="relative overflow-hidden">
                       <img
-                        src={course.thumbnailUrl || 'https://placehold.co/600x400/22c55e/white?text=Course'}
+                        src={
+                          course.thumbnailUrl ||
+                          'https://placehold.co/600x400/22c55e/white?text=Course'
+                        }
                         alt={course.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />

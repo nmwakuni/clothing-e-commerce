@@ -2,8 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Input, Alert, Badge } from '@lms/ui';
-import { CreditCard, Smartphone, CheckCircle2, Loader, ArrowLeft, Shield, Clock } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Button,
+  Input,
+  Alert,
+  Badge,
+} from '@lms/ui';
+import {
+  CreditCard,
+  Smartphone,
+  CheckCircle2,
+  Loader,
+  ArrowLeft,
+  Shield,
+  Clock,
+} from 'lucide-react';
 import Link from 'next/link';
 
 // Mock data (replace with API)
@@ -98,7 +116,7 @@ export default function CheckoutPage() {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           body: JSON.stringify({
             phoneNumber,
@@ -142,7 +160,7 @@ export default function CheckoutPage() {
       try {
         const response = await fetch(`/api/payments/mpesa/status?checkoutRequestId=${checkoutId}`, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
 
@@ -176,11 +194,14 @@ export default function CheckoutPage() {
     if (!checkoutRequestId) return;
 
     try {
-      const response = await fetch(`/api/payments/mpesa/status?checkoutRequestId=${checkoutRequestId}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+      const response = await fetch(
+        `/api/payments/mpesa/status?checkoutRequestId=${checkoutRequestId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to check payment status');
@@ -222,7 +243,8 @@ export default function CheckoutPage() {
               <h2 className="text-3xl font-bold text-green-600">Payment Successful! 🎉</h2>
 
               <p className="text-gray-600">
-                You've successfully enrolled in <span className="font-bold">{courseData.title}</span>
+                You've successfully enrolled in{' '}
+                <span className="font-bold">{courseData.title}</span>
               </p>
 
               <div className="bg-gray-50 border rounded-lg p-4 space-y-2 text-sm">
@@ -248,11 +270,18 @@ export default function CheckoutPage() {
               </Alert>
 
               <div className="pt-4 space-y-3">
-                <Button className="w-full" size="lg" onClick={() => router.push(`/courses/${courseId}/lessons/1`)}>
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => router.push(`/courses/${courseId}/lessons/1`)}
+                >
                   Start Learning Now
                 </Button>
 
-                <Link href="/dashboard" className="block text-center text-sm text-gray-600 hover:text-green-600">
+                <Link
+                  href="/dashboard"
+                  className="block text-center text-sm text-gray-600 hover:text-green-600"
+                >
                   Go to Dashboard
                 </Link>
               </div>
@@ -268,7 +297,10 @@ export default function CheckoutPage() {
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header */}
         <div className="mb-8">
-          <Link href={`/courses/${courseId}`} className="inline-flex items-center gap-2 text-gray-600 hover:text-green-600 mb-4">
+          <Link
+            href={`/courses/${courseId}`}
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-green-600 mb-4"
+          >
             <ArrowLeft className="h-4 w-4" />
             Back to Course
           </Link>
@@ -328,7 +360,9 @@ export default function CheckoutPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>M-Pesa Details</CardTitle>
-                  <CardDescription>Enter your M-Pesa number to receive payment prompt</CardDescription>
+                  <CardDescription>
+                    Enter your M-Pesa number to receive payment prompt
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
@@ -437,7 +471,10 @@ export default function CheckoutPage() {
 
                     <p className="text-sm text-gray-600">
                       Need help?{' '}
-                      <a href="https://wa.me/254712345678" className="text-green-600 hover:underline">
+                      <a
+                        href="https://wa.me/254712345678"
+                        className="text-green-600 hover:underline"
+                      >
                         Contact Support on WhatsApp
                       </a>
                     </p>
@@ -470,11 +507,15 @@ export default function CheckoutPage() {
                 <div className="space-y-2 pt-4 border-t">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Original Price:</span>
-                    <span className="line-through text-gray-500">{formatPrice(courseData.originalPrice)}</span>
+                    <span className="line-through text-gray-500">
+                      {formatPrice(courseData.originalPrice)}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Discount:</span>
-                    <span className="text-green-600">-{formatPrice(courseData.originalPrice - courseData.price)}</span>
+                    <span className="text-green-600">
+                      -{formatPrice(courseData.originalPrice - courseData.price)}
+                    </span>
                   </div>
                   <div className="flex justify-between text-lg font-bold pt-2 border-t">
                     <span>Total:</span>

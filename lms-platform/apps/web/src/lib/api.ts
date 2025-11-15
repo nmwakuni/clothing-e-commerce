@@ -6,7 +6,11 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
 
 class APIError extends Error {
-  constructor(public status: number, message: string, public data?: any) {
+  constructor(
+    public status: number,
+    message: string,
+    public data?: any
+  ) {
     super(message);
     this.name = 'APIError';
   }
@@ -90,13 +94,10 @@ export const authAPI = {
   },
 
   async refreshToken(token: string) {
-    return apiRequest<{ success: boolean; token: string; expiresAt: string }>(
-      '/api/auth/refresh',
-      {
-        method: 'POST',
-        body: { token },
-      }
-    );
+    return apiRequest<{ success: boolean; token: string; expiresAt: string }>('/api/auth/refresh', {
+      method: 'POST',
+      body: { token },
+    });
   },
 };
 
@@ -104,9 +105,7 @@ export const authAPI = {
 export const coursesAPI = {
   async listCourses(filters?: { category?: string; difficulty?: string }) {
     const params = new URLSearchParams(filters as any);
-    return apiRequest<{ courses: any[]; total: number }>(
-      `/api/courses?${params.toString()}`
-    );
+    return apiRequest<{ courses: any[]; total: number }>(`/api/courses?${params.toString()}`);
   },
 
   async getCourse(slug: string) {
@@ -126,12 +125,9 @@ export const coursesAPI = {
   },
 
   async getProgress(courseId: string) {
-    return apiRequest<{ enrollment: any; progress: any[] }>(
-      `/api/courses/${courseId}/progress`,
-      {
-        requireAuth: true,
-      }
-    );
+    return apiRequest<{ enrollment: any; progress: any[] }>(`/api/courses/${courseId}/progress`, {
+      requireAuth: true,
+    });
   },
 
   async completeLesson(courseId: string, lessonId: string, timeSpentSeconds?: number) {

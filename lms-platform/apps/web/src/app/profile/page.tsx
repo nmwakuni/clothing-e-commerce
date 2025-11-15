@@ -3,8 +3,29 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { Card, CardContent, CardHeader, CardTitle, Button, Badge, Avatar, Progress, Input } from '@lms/ui';
-import { Mail, Phone, Calendar, Award, BookOpen, Clock, TrendingUp, Edit2, Save, X } from 'lucide-react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Button,
+  Badge,
+  Avatar,
+  Progress,
+  Input,
+} from '@lms/ui';
+import {
+  Mail,
+  Phone,
+  Calendar,
+  Award,
+  BookOpen,
+  Clock,
+  TrendingUp,
+  Edit2,
+  Save,
+  X,
+} from 'lucide-react';
 import { authAPI, isAuthenticated } from '@/lib/api';
 
 export default function ProfilePage() {
@@ -96,7 +117,11 @@ export default function ProfilePage() {
                   <p className="text-gray-600 text-sm mb-4">{user.phoneNumber}</p>
 
                   <Badge variant="default" className="mb-2">
-                    {user.subscriptionTier === 'premium' ? '⭐ Premium' : user.subscriptionTier === 'free' ? 'Free' : user.subscriptionTier}
+                    {user.subscriptionTier === 'premium'
+                      ? '⭐ Premium'
+                      : user.subscriptionTier === 'free'
+                        ? 'Free'
+                        : user.subscriptionTier}
                   </Badge>
 
                   <div className="mt-6 pt-6 border-t space-y-4">
@@ -115,7 +140,9 @@ export default function ProfilePage() {
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-4 pt-4">
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-orange-600">{user.streakDays || 0}</div>
+                        <div className="text-2xl font-bold text-orange-600">
+                          {user.streakDays || 0}
+                        </div>
                         <div className="text-xs text-gray-600">Day Streak</div>
                       </div>
                       <div className="text-center">
@@ -219,7 +246,9 @@ export default function ProfilePage() {
                     </label>
                     <div className="flex items-center gap-2">
                       <p className="text-gray-900">{user.phoneNumber}</p>
-                      <Badge variant="success" className="text-xs">Verified</Badge>
+                      <Badge variant="success" className="text-xs">
+                        Verified
+                      </Badge>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">
                       Phone number cannot be changed for security reasons
@@ -261,7 +290,9 @@ export default function ProfilePage() {
                   <div className="flex items-center justify-between pt-4 border-t">
                     <div>
                       <p className="font-medium">WhatsApp Notifications</p>
-                      <p className="text-sm text-gray-600">Receive learning reminders via WhatsApp</p>
+                      <p className="text-sm text-gray-600">
+                        Receive learning reminders via WhatsApp
+                      </p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input type="checkbox" className="sr-only peer" defaultChecked />
