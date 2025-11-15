@@ -1,0 +1,18 @@
+{
+  "name": "@mtaa/whatsapp-bot",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@mtaa/database": "workspace:*",
+    "@mtaa/notifications": "workspace:*",
+    "@mtaa/news-aggregator": "workspace:*",
+    "drizzle-orm": "^0.29.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}
