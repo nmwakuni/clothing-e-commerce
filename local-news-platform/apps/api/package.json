@@ -1,0 +1,23 @@
+{
+  "name": "@mtaa/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.0.0",
+    "@mtaa/database": "workspace:*",
+    "@mtaa/news-aggregator": "workspace:*",
+    "@mtaa/ai-verification": "workspace:*",
+    "@mtaa/notifications": "workspace:*",
+    "drizzle-orm": "^0.29.3",
+    "@neondatabase/serverless": "^0.9.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240208.0",
+    "wrangler": "^3.28.2",
+    "typescript": "^5.3.3"
+  }
+}
