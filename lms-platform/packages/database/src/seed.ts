@@ -39,37 +39,102 @@ async function seed() {
 
     console.log('✅ Users created');
 
-    // Create sample course
+    // Create sample courses
     console.log('Creating courses...');
-    const [webDevCourse] = await db
+    const coursesData = await db
       .insert(courses)
       .values([
         {
           title: 'Web Development Fundamentals',
           slug: 'web-development-fundamentals',
           description:
-            'Learn the fundamentals of web development including HTML, CSS, and JavaScript. Build real projects and deploy them live.',
-          shortDescription: 'Master web development from scratch in 6 weeks',
-          thumbnailUrl: 'https://placehold.co/600x400/png?text=Web+Dev',
+            'Learn the fundamentals of web development including HTML, CSS, and JavaScript. Build real projects and deploy them live. Perfect for beginners looking to start a career in tech.',
+          shortDescription: 'Master HTML, CSS & JavaScript from scratch',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800',
           difficulty: 'beginner',
-          category: 'programming',
+          category: 'web-development',
           tags: ['html', 'css', 'javascript', 'web'],
-          priceKes: 2000,
-          estimatedHours: '40',
+          priceKes: 2500,
+          originalPriceKes: 5000,
+          estimatedHours: '18',
+          totalLessons: 42,
+          enrollmentCount: 3421,
+          averageRating: '4.8',
           learningOutcomes: [
             'Build responsive websites with HTML & CSS',
             'Create interactive web pages with JavaScript',
             'Deploy websites to the internet',
             'Understand how the web works',
+            'Build a professional portfolio',
           ],
           prerequisites: ['Basic computer skills', 'Willingness to learn'],
           status: 'published',
           publishedAt: new Date(),
+          language: 'English',
+          aiContext: 'This course teaches web development fundamentals for absolute beginners with African context.',
+        },
+        {
+          title: 'Python for Data Science',
+          slug: 'python-data-science',
+          description:
+            'Learn Python programming and data analysis from scratch. Master pandas, numpy, and data visualization. Build real data science projects that matter.',
+          shortDescription: 'Learn Python and data analysis from scratch',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800',
+          difficulty: 'beginner',
+          category: 'data-science',
+          tags: ['python', 'data-science', 'pandas', 'numpy'],
+          priceKes: 3000,
+          originalPriceKes: 6000,
+          estimatedHours: '22',
+          totalLessons: 38,
+          enrollmentCount: 1823,
+          averageRating: '4.7',
+          learningOutcomes: [
+            'Master Python programming basics',
+            'Analyze data with pandas and numpy',
+            'Create data visualizations',
+            'Build data science projects',
+          ],
+          prerequisites: ['Basic math skills', 'A computer'],
+          status: 'published',
+          publishedAt: new Date(),
+          language: 'English',
+          aiContext: 'This course teaches Python for data science with African context examples.',
+        },
+        {
+          title: 'Mobile App Development with React Native',
+          slug: 'react-native-mobile-development',
+          description:
+            'Build iOS and Android apps using React Native. Learn mobile development from scratch and publish your own apps to the App Store and Play Store.',
+          shortDescription: 'Build cross-platform mobile apps',
+          thumbnailUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800',
+          difficulty: 'intermediate',
+          category: 'mobile-development',
+          tags: ['react-native', 'mobile', 'ios', 'android'],
+          priceKes: 4000,
+          originalPriceKes: 8000,
+          estimatedHours: '28',
+          totalLessons: 52,
+          enrollmentCount: 956,
+          averageRating: '4.9',
+          learningOutcomes: [
+            'Build native mobile apps',
+            'Master React Native',
+            'Integrate APIs and databases',
+            'Publish to App Store and Play Store',
+          ],
+          prerequisites: ['JavaScript basics', 'React basics'],
+          status: 'published',
+          publishedAt: new Date(),
+          language: 'English',
+          aiContext: 'This course teaches mobile app development with React Native.',
         },
       ])
       .returning();
 
-    console.log('✅ Courses created');
+    const [webDevCourse, pythonCourse, mobileCourse] = coursesData;
+
+    console.log('✅ Created 3 courses');
 
     // Create sample lessons
     console.log('Creating lessons...');
@@ -154,12 +219,55 @@ HTML (HyperText Markup Language) is the standard language for creating web pages
 
     console.log('✅ Lessons created');
 
+    // Add more lessons for Python course
+    await db.insert(lessons).values([
+      {
+        courseId: pythonCourse.id,
+        title: 'Introduction to Python',
+        slug: 'introduction-to-python',
+        description: 'Get started with Python programming',
+        contentType: 'video',
+        contentData: {
+          url: 'https://example.com/videos/python-intro.mp4',
+          duration: 1200,
+        },
+        sectionName: 'Python Basics',
+        orderIndex: 1,
+        estimatedMinutes: 20,
+        isPreview: true,
+        isPublished: true,
+        aiContext: 'Introduction to Python basics, installation, first program.',
+      },
+      {
+        courseId: pythonCourse.id,
+        title: 'Variables and Data Types',
+        slug: 'variables-data-types',
+        description: 'Learn about Python variables, strings, numbers, and more',
+        contentType: 'text',
+        contentData: {
+          markdown: '# Variables in Python\n\nLearn about Python variables and data types...',
+          readingTime: 15,
+        },
+        sectionName: 'Python Basics',
+        orderIndex: 2,
+        estimatedMinutes: 25,
+        isPreview: true,
+        isPublished: true,
+        aiContext: 'Python variables, strings, numbers, booleans.',
+      },
+    ]);
+
     console.log('\n🎉 Database seeded successfully!');
-    console.log('\nSample data created:');
-    console.log('- Admin user: admin@skillhub.co.ke (+254712345678)');
-    console.log('- Creator user: creator@skillhub.co.ke (+254722222222)');
-    console.log('- Student user: student@skillhub.co.ke (+254733333333)');
-    console.log('- Course: Web Development Fundamentals (3 lessons)');
+    console.log('\n📊 Sample data created:');
+    console.log('  👥 Users:');
+    console.log('    - Admin: admin@skillhub.co.ke (+254712345678)');
+    console.log('    - Creator: creator@skillhub.co.ke (+254722222222)');
+    console.log('    - Student: student@skillhub.co.ke (+254733333333)');
+    console.log('\n  📚 Courses:');
+    console.log('    - Web Development Fundamentals (3 lessons)');
+    console.log('    - Python for Data Science (2 lessons)');
+    console.log('    - Mobile App Development (coming soon)');
+    console.log('\n🚀 Ready to run! Start the app with: pnpm dev');
   } catch (error) {
     console.error('❌ Seeding failed');
     console.error(error);

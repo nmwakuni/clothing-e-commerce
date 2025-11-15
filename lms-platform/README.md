@@ -1,6 +1,41 @@
-# 🎓 LMS Platform - SkillHub Africa
+# 🎓 SkillHub Africa - LMS Platform
 
-AI-Powered Learning Management System for comprehensive education via WhatsApp, Web, and Mobile.
+**AI-Powered Learning Management System built for Africa** 🌍
+
+Complete learning platform with WhatsApp-first approach, M-Pesa payments, and AI tutoring using Claude & GPT-4.
+
+## ⚡ Quick Start
+
+```bash
+# 1. Install dependencies
+pnpm install
+
+# 2. Set up environment variables
+cp apps/web/.env.example apps/web/.env
+cp apps/api/.env.example apps/api/.env
+# Edit .env files with your API keys
+
+# 3. Set up database (Neon PostgreSQL)
+pnpm db:migrate
+pnpm db:seed
+
+# 4. Run development servers
+pnpm dev:api    # Terminal 1 - API on :8787
+pnpm dev:web    # Terminal 2 - Web on :3000
+```
+
+Visit http://localhost:3000 to see the app!
+
+## ✨ Key Features
+
+- **📱 WhatsApp Learning** - Complete course experience via WhatsApp
+- **🤖 AI Tutor** - Powered by Claude 3.5 Sonnet with African context
+- **💳 M-Pesa Payments** - Seamless course payments via M-Pesa
+- **📲 Phone Auth** - Login with phone number (no passwords!)
+- **🎮 Gamification** - XP, levels, streaks & achievements
+- **📊 Progress Tracking** - Detailed analytics and insights
+- **🎯 Interactive Content** - Videos, text, code exercises & quizzes
+- **🌍 African Context** - Examples tailored for Kenya & Africa
 
 ## 🏗️ Architecture
 
