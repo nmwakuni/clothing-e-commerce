@@ -1,0 +1,19 @@
+{
+  "name": "@lms/payments",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Payment processing for LMS Platform (M-Pesa, Cards, etc.)",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^3.24.1",
+    "nanoid": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}
