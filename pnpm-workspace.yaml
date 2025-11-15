@@ -1,0 +1,12 @@
+packages:
+  # LMS Platform
+  - 'lms-platform/apps/*'
+  - 'lms-platform/packages/*'
+
+  # Mental Health Bot (future)
+  - 'mental-health-bot/apps/*'
+  - 'mental-health-bot/packages/*'
+
+  # Local News Platform (future)
+  - 'local-news-platform/apps/*'
+  - 'local-news-platform/packages/*'
