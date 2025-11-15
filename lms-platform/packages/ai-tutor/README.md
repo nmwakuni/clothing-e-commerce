@@ -1,194 +1,211 @@
 # @lms/ai-tutor
 
-AI-powered tutoring service using Claude 3.5 Sonnet and GPT-4.
+AI-powered tutoring system using Claude and OpenAI for 24/7 learning support.
 
 ## Features
 
-- 🧠 **Intelligent tutoring** using Claude or GPT-4
-- 📚 **Multiple teaching strategies** (Socratic method, worked examples, etc.)
-- 🌍 **Culturally relevant** (uses African/Kenyan context in examples)
-- 💬 **Conversational** (optimized for WhatsApp messaging)
-- 🎯 **Personalized** (adapts to student level and learning style)
-- 📊 **Cost tracking** (monitors token usage and costs)
+- 🤖 Context-aware tutoring based on current lesson
+- 💡 Concept explanations in simple terms
+- 🔍 Code review and feedback
+- 🐛 Code debugging assistance
+- 📝 Practice exercise generation
+- 🎯 Step-by-step guidance
+- 🌍 Adapted for African learners
+
+## Installation
+
+```bash
+pnpm install
+```
+
+## Environment Variables
+
+Add to your `.env` file:
+
+```bash
+# Use either Claude or OpenAI
+AI_TUTOR_PROVIDER=claude  # or 'openai'
+
+# Claude
+ANTHROPIC_API_KEY=sk-ant-...
+
+# OpenAI
+OPENAI_API_KEY=sk-...
+```
 
 ## Usage
 
-```typescript
-import { createAITutor, TutorContext } from '@lms/ai-tutor';
+### Initialize the service
 
-// Create tutor instance
-const tutor = createAITutor({
-  provider: 'anthropic',
-  anthropicApiKey: process.env.ANTHROPIC_API_KEY,
+```typescript
+import { AITutorService } from '@lms/ai-tutor';
+
+const tutor = new AITutorService({
+  provider: 'claude', // or 'openai'
+  apiKey: process.env.ANTHROPIC_API_KEY!,
   model: 'claude-3-5-sonnet-20241022', // optional
 });
+```
 
-// Set up context
-const context: TutorContext = {
-  userId: 'user_123',
-  lessonId: 'lesson_html_basics',
-  courseId: 'course_web_dev',
+### Ask a question
+
+```typescript
+const response = await tutor.askQuestion('How do I use CSS Flexbox?', {
+  courseTitle: 'Web Development Fundamentals',
+  lessonTitle: 'CSS Flexbox Layout',
   userLevel: 'beginner',
-  learningStyle: 'visual',
-  lessonContent: 'HTML is the structure of web pages...',
-  conversationHistory: [
-    { role: 'user', content: 'What is HTML?' },
-    { role: 'assistant', content: 'HTML is like the skeleton of a website...' },
+});
+
+console.log(response.message);
+// Includes suggestions and code examples
+```
+
+### Explain a concept
+
+```typescript
+const explanation = await tutor.explainConcept('recursion', {
+  courseTitle: 'Python for Data Science',
+  lessonTitle: 'Functions in Python',
+  userLevel: 'intermediate',
+});
+```
+
+### Review code
+
+```typescript
+const feedback = await tutor.reviewCode(
+  `
+function calculateTotal(items) {
+  var total = 0;
+  for (var i = 0; i < items.length; i++) {
+    total += items[i].price;
+  }
+  return total;
+}
+  `,
+  'javascript',
+  {
+    courseTitle: 'JavaScript Basics',
+    lessonTitle: 'Functions and Arrays',
+  }
+);
+```
+
+### Debug code
+
+```typescript
+const help = await tutor.debugCode(
+  `
+def greet(name):
+  print("Hello, " + name
+  `,
+  'SyntaxError: unexpected EOF while parsing',
+  'python',
+  {
+    courseTitle: 'Python Basics',
+    lessonTitle: 'Functions',
+  }
+);
+```
+
+### Generate practice exercises
+
+```typescript
+const exercise = await tutor.generateExercise('for loops', 'medium', {
+  courseTitle: 'Python Basics',
+  lessonTitle: 'Loops in Python',
+});
+```
+
+### Conversational context
+
+```typescript
+const context = {
+  courseTitle: 'Web Development',
+  lessonTitle: 'HTML Forms',
+  previousMessages: [
+    { role: 'user', content: 'What is a form element?' },
+    {
+      role: 'assistant',
+      content: 'A form element is used to collect user input...',
+    },
   ],
 };
 
-// Chat with tutor
-const response = await tutor.chat('I don\'t understand tags', context);
-console.log(response.message);
-
-// Specialized methods
-const explanation = await tutor.explainConcept('variables', context);
-const codeReview = await tutor.reviewCode('print("hello")', 'python', context);
-const exercise = await tutor.generateExercise('loops', 'easy', context);
-```
-
-## Teaching Strategies
-
-The AI tutor uses proven pedagogical approaches:
-
-### Socratic Method
-Guides students to discover answers through questions:
-```
-Student: "I don't understand recursion"
-Tutor: "Great question! Have you seen Russian nesting dolls?
-       How is that similar to a function calling itself?"
-```
-
-### Contextual Learning
-Uses familiar African/Kenyan examples:
-```
-- Variables → M-Pesa wallets
-- Arrays → Matatu routes
-- Functions → Chapati recipes
-- APIs → Calling a taxi via phone
-```
-
-### Growth Mindset
-Encourages persistence and learning from mistakes:
-```
-"That's a great attempt! You're thinking in the right direction."
-"Making mistakes means you're learning."
-```
-
-### Chunking
-Breaks complex topics into digestible pieces:
-```
-1. Big picture (what & why)
-2. Smaller concepts
-3. Connect pieces
-4. Review whole
-```
-
-## Configuration
-
-### Provider: Anthropic (Claude)
-```typescript
-{
-  provider: 'anthropic',
-  anthropicApiKey: 'sk-ant-...',
-  model: 'claude-3-5-sonnet-20241022' // or claude-3-opus-20240229
-}
-```
-
-### Provider: OpenAI (GPT-4)
-```typescript
-{
-  provider: 'openai',
-  openaiApiKey: 'sk-...',
-  model: 'gpt-4-turbo-preview' // or gpt-3.5-turbo
-}
+const response = await tutor.askQuestion('Can you show me an example?', context);
 ```
 
 ## Response Format
 
 ```typescript
-{
-  message: string;              // AI tutor's response
-  suggestedActions?: [          // Optional actions
-    {
-      type: 'practice_exercise' | 'next_lesson' | 'take_quiz' | 'review_concept',
-      title: string,
-      description: string,
-    }
-  ];
-  learningInsights?: [           // Student performance insights
-    {
-      type: 'strength' | 'weakness' | 'progress',
-      message: string,
-    }
-  ];
-  metadata: {
-    model: string;               // Model used
-    tokensUsed: number;          // Total tokens
-    costUsd: number;             // Approximate cost
+interface TutorResponse {
+  message: string; // Main response text
+  suggestions?: string[]; // Extracted bullet points
+  codeExamples?: string[]; // Code blocks from response
+  resources?: Array<{
+    // Additional resources (future)
+    title: string;
+    url: string;
+  }>;
+}
+```
+
+## Models
+
+### Claude (Recommended)
+
+- `claude-3-5-sonnet-20241022` (default) - Best balance
+- `claude-3-opus-20240229` - Most capable
+- `claude-3-haiku-20240307` - Fastest, cheaper
+
+### OpenAI
+
+- `gpt-4-turbo-preview` (default) - Best quality
+- `gpt-3.5-turbo` - Faster, cheaper
+
+## Best Practices
+
+1. **Provide Context**: Always include course and lesson information
+2. **Set User Level**: Helps tailor explanations appropriately
+3. **Maintain Conversation**: Pass previous messages for better context
+4. **Cache Responses**: Consider caching common questions
+5. **Rate Limiting**: Implement rate limits for API calls
+6. **Error Handling**: Handle API errors gracefully
+
+## Features for African Learners
+
+- Uses examples relevant to African contexts
+- Simple, clear language
+- Practical, real-world applications
+- Encouraging and supportive tone
+- Patient explanations
+- Cultural awareness
+
+## Integration with WhatsApp
+
+```typescript
+import { AITutorService } from '@lms/ai-tutor';
+import { WhatsAppService } from '@lms/whatsapp';
+
+// User asks question via WhatsApp
+const userMessage = 'How do I create a function in Python?';
+
+const response = await tutor.askQuestion(userMessage, context);
+
+await whatsapp.sendTextMessage(phoneNumber, response.message);
+
+// Send code examples if any
+if (response.codeExamples) {
+  for (const example of response.codeExamples) {
+    await whatsapp.sendTextMessage(phoneNumber, `\`\`\`\n${example}\n\`\`\``);
   }
 }
 ```
 
 ## Cost Management
 
-The package tracks API costs:
-- **Claude 3.5 Sonnet**: ~$0.003 per 1K input tokens, ~$0.015 per 1K output tokens
-- **GPT-4 Turbo**: ~$0.01 per 1K tokens
-
-Example costs per conversation:
-- Simple question (500 tokens): ~$0.005
-- Code review (1500 tokens): ~$0.015
-- Complex explanation (2000 tokens): ~$0.020
-
-## Best Practices
-
-1. **Pass conversation history** for context-aware responses
-2. **Include lesson content** for accurate, relevant answers
-3. **Set user level** (beginner/intermediate/advanced) for appropriate complexity
-4. **Specify learning style** for personalized teaching
-5. **Monitor costs** using metadata.costUsd
-6. **Implement caching** to reduce API calls for common questions
-
-## Examples
-
-### Explaining a Concept
-```typescript
-const response = await tutor.explainConcept('variables', {
-  userId: 'user_123',
-  userLevel: 'beginner',
-  learningStyle: 'visual',
-});
-// "Think of a variable like an M-Pesa wallet. It stores a value (money)
-//  and you can change what's inside..."
-```
-
-### Reviewing Code
-```typescript
-const response = await tutor.reviewCode(
-  'def hello():\nprint("hello")',
-  'python',
-  context
-);
-// "Good start! Your function works correctly. Here's how to improve it:
-//  1. Add a parameter to make it flexible..."
-```
-
-### Generating Practice
-```typescript
-const response = await tutor.generateExercise('loops', 'easy', context);
-// "Exercise: Count from 1 to 10
-//  Write a Python loop that prints numbers 1 through 10.
-//  Hint: Use the range() function..."
-```
-
-## Development
-
-```bash
-# Type checking
-pnpm type-check
-```
-
-## License
-
-MIT
+- Claude Sonnet: ~$3 per million input tokens
+- GPT-4 Turbo: ~$10 per million input tokens
+- Set max_tokens to control costs
+- Cache common responses
+- Use cheaper models for simple questions

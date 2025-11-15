@@ -1,273 +1,155 @@
 # @lms/whatsapp
 
-WhatsApp Business API integration for the LMS Platform.
+WhatsApp Business API integration for SkillHub Africa LMS platform.
 
 ## Features
 
-- 📱 **Send text messages** with rich formatting
-- 🖼️ **Send media** (images, videos, documents)
-- 🔘 **Interactive buttons** (up to 3 buttons)
-- 📋 **Interactive lists** (for menus/catalogs)
-- 📧 **Template messages** (pre-approved by Meta)
-- ✅ **Mark messages as read**
-- 📥 **Download media** from users
-- 🔐 **Webhook verification** & parsing
-- 📚 **Pre-built templates** for common learning scenarios
+- 📱 Interactive lesson delivery via WhatsApp
+- 📝 Quiz handling with instant feedback
+- 🎯 Menu-driven navigation
+- 🔔 Daily reminders and notifications
+- 🏆 Achievement notifications
+- 📊 Progress updates
 
-## Quick Start
-
-```typescript
-import { createWhatsAppService } from '@lms/whatsapp';
-
-const whatsapp = createWhatsAppService({
-  accessToken: process.env.WHATSAPP_TOKEN!,
-  phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID!,
-  apiVersion: 'v21.0', // optional, defaults to v21.0
-});
-
-// Send a simple text message
-await whatsapp.sendText('+254712345678', 'Hello from SkillHub!');
-```
-
-## Sending Messages
-
-### Text Message
-```typescript
-await whatsapp.sendText(
-  '+254712345678',
-  'Welcome to SkillHub Africa! 🎓',
-  true // preview URLs
-);
-```
-
-### Image Message
-```typescript
-await whatsapp.sendImage(
-  '+254712345678',
-  'https://example.com/image.jpg',
-  'Check out this course!' // optional caption
-);
-```
-
-### Interactive Buttons
-```typescript
-await whatsapp.sendButtons(
-  '+254712345678',
-  'What would you like to do?',
-  [
-    { id: 'browse_courses', title: 'Browse Courses' },
-    { id: 'continue', title: 'Continue Learning' },
-    { id: 'help', title: 'Get Help' },
-  ],
-  {
-    header: 'Welcome!', // optional
-    footer: 'Reply anytime', // optional
-  }
-);
-```
-
-### Interactive List
-```typescript
-await whatsapp.sendList(
-  '+254712345678',
-  'Choose a course to learn',
-  'View Courses', // button text
-  [
-    {
-      title: 'Programming',
-      rows: [
-        {
-          id: 'web_dev',
-          title: 'Web Development',
-          description: 'HTML, CSS, JavaScript',
-        },
-        {
-          id: 'python',
-          title: 'Python Basics',
-          description: 'Learn Python from scratch',
-        },
-      ],
-    },
-    {
-      title: 'Business',
-      rows: [
-        {
-          id: 'marketing',
-          title: 'Digital Marketing',
-          description: 'Social media, SEO, ads',
-        },
-      ],
-    },
-  ],
-  {
-    header: 'Course Catalog',
-    footer: 'KES 2,000 per course',
-  }
-);
-```
-
-## Pre-built Templates
-
-```typescript
-import {
-  sendWelcomeMessage,
-  sendCourseCatalog,
-  sendQuizResult,
-  sendCertificate,
-} from '@lms/whatsapp/templates/learning-messages';
-
-// Welcome new user
-await sendWelcomeMessage(whatsapp, '+254712345678', 'John');
-
-// Show course catalog
-await sendCourseCatalog(whatsapp, '+254712345678');
-
-// Send quiz results
-await sendQuizResult(whatsapp, '+254712345678', 8, 10, true);
-
-// Award certificate
-await sendCertificate(
-  whatsapp,
-  '+254712345678',
-  'Web Development',
-  'https://cert.skillhub.co.ke/123',
-  'CERT-123456'
-);
-```
-
-## Webhook Handling
-
-```typescript
-// Verify webhook (GET request)
-const isValid = WhatsAppService.verifyWebhook(
-  mode, // from query params
-  token, // from query params
-  process.env.WHATSAPP_VERIFY_TOKEN!
-);
-
-// Parse webhook event (POST request)
-const event = WhatsAppService.parseWebhookEvent(requestBody);
-
-if (event?.messages) {
-  for (const message of event.messages) {
-    console.log('Received message from:', message.from);
-    console.log('Message type:', message.type);
-
-    if (message.type === 'text') {
-      console.log('Text:', message.text?.body);
-    }
-
-    if (message.type === 'interactive') {
-      const buttonId = message.interactive?.button_reply?.id;
-      console.log('Button clicked:', buttonId);
-    }
-
-    // Mark as read
-    await whatsapp.markAsRead(message.id);
-  }
-}
-
-if (event?.statuses) {
-  for (const status of event.statuses) {
-    console.log('Message status:', status.status);
-  }
-}
-```
-
-## Media Handling
-
-```typescript
-// User sends an image
-if (message.type === 'image' && message.image) {
-  // Get media URL
-  const { url, mimeType } = await whatsapp.getMediaUrl(message.image.id);
-
-  // Download media
-  const buffer = await whatsapp.downloadMedia(url);
-
-  // Process the image...
-}
-```
-
-## Message Limits
-
-WhatsApp has rate limits:
-- **1,000 messages/second** per phone number
-- **Conversations**: 24-hour window after user messages you
-- **Template messages**: Can send anytime (if approved by Meta)
-- **Button limit**: Max 3 buttons per message
-- **List limit**: Max 10 sections, max 10 rows per section
-
-## Best Practices
-
-1. **Keep messages concise** - WhatsApp is for quick interactions
-2. **Use buttons/lists** for navigation (better UX than typing)
-3. **Mark messages as read** - Shows you're responsive
-4. **Handle errors gracefully** - Always send helpful error messages
-5. **Respect 24-hour window** - Use templates for follow-ups
-6. **Test on real WhatsApp** - Emulators don't show interactive messages correctly
-
-## Template Message Guidelines
-
-To send template messages (outside 24-hour window):
-1. Create template in Meta Business Manager
-2. Get it approved by Meta (usually 24-48 hours)
-3. Use the template name in code:
-
-```typescript
-await whatsapp.sendTemplate(
-  '+254712345678',
-  'daily_reminder', // template name
-  'en', // language code
-  [
-    {
-      type: 'body',
-      parameters: [
-        { type: 'text', text: 'John' },
-        { type: 'text', text: 'Web Development' },
-      ],
-    },
-  ]
-);
-```
-
-## Error Handling
-
-```typescript
-try {
-  await whatsapp.sendText('+254712345678', 'Hello!');
-} catch (error) {
-  console.error('Failed to send message:', error);
-  // Handle error (retry, log, notify)
-}
-```
-
-## Common Errors
-
-- **130472**: User's phone number is not on WhatsApp
-- **131051**: Message failed to send (temporary issue)
-- **131056**: Rate limit exceeded
-- **131031**: Recipient unable to receive messages
-
-## Development
+## Installation
 
 ```bash
-# Type checking
-pnpm type-check
+pnpm install
 ```
 
 ## Environment Variables
 
+Add to your `.env` file:
+
 ```bash
-WHATSAPP_TOKEN=your-access-token
-WHATSAPP_PHONE_NUMBER_ID=your-phone-number-id
-WHATSAPP_VERIFY_TOKEN=your-webhook-verify-token
+WHATSAPP_ACCESS_TOKEN=your_access_token
+WHATSAPP_PHONE_NUMBER_ID=your_phone_number_id
+WHATSAPP_WEBHOOK_VERIFY_TOKEN=your_verify_token
+WHATSAPP_BUSINESS_ACCOUNT_ID=your_business_account_id
 ```
 
-## Testing
+## Usage
 
-Use the [WhatsApp Business API Test Number](https://developers.facebook.com/docs/whatsapp/cloud-api/get-started) for development.
+### Initialize the service
 
-## License
+```typescript
+import { WhatsAppService, LessonDeliveryService } from '@lms/whatsapp';
 
-MIT
+const whatsappService = new WhatsAppService({
+  accessToken: process.env.WHATSAPP_ACCESS_TOKEN!,
+  phoneNumberId: process.env.WHATSAPP_PHONE_NUMBER_ID!,
+  webhookVerifyToken: process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN!,
+  businessAccountId: process.env.WHATSAPP_BUSINESS_ACCOUNT_ID!,
+});
+
+const lessonDelivery = new LessonDeliveryService(whatsappService);
+```
+
+### Send a lesson
+
+```typescript
+const lesson = {
+  id: '123',
+  title: 'Introduction to Python',
+  contentType: 'text',
+  contentData: {
+    markdown: '# Hello Python\n\nPython is amazing...',
+    readingTime: 15,
+  },
+  estimatedMinutes: 15,
+};
+
+const lessonHandler = lessonDelivery.getLessonHandler();
+await lessonHandler.deliverLesson('+254712345678', lesson);
+```
+
+### Handle quiz
+
+```typescript
+const quizHandler = lessonDelivery.getQuizHandler();
+
+await quizHandler.startQuiz('+254712345678', 'user123', 'lesson456', [
+  {
+    question: 'What is Python?',
+    options: ['A snake', 'A programming language', 'A database', 'An OS'],
+    correctAnswer: 1,
+    explanation: 'Python is a high-level programming language.',
+  },
+]);
+```
+
+### Send notifications
+
+```typescript
+await lessonDelivery.sendDailyReminder('+254712345678', 'John', 15);
+
+await lessonDelivery.sendStreakReminder('+254712345678', 'John', 7);
+
+await lessonDelivery.sendAchievementNotification(
+  '+254712345678',
+  'Week Warrior',
+  'Completed 7 days in a row!',
+  '🔥'
+);
+```
+
+## Webhook Integration
+
+Set up a webhook endpoint in your API to receive WhatsApp messages:
+
+```typescript
+app.post('/api/whatsapp/webhook', (req, res) => {
+  const { entry } = req.body;
+
+  entry.forEach((event) => {
+    const changes = event.changes[0];
+    const message = changes.value.messages?.[0];
+
+    if (message) {
+      // Handle incoming message
+      handleIncomingMessage(message);
+    }
+  });
+
+  res.sendStatus(200);
+});
+
+app.get('/api/whatsapp/webhook', (req, res) => {
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  const result = whatsappService.verifyWebhook(mode, token, challenge);
+
+  if (result) {
+    res.send(result);
+  } else {
+    res.sendStatus(403);
+  }
+});
+```
+
+## Message Types
+
+- **Text Lessons**: Formatted markdown delivered in chunks
+- **Video Lessons**: Links with duration info
+- **Interactive Exercises**: Redirect to web app
+- **Quizzes**: Step-by-step question delivery
+- **Button Messages**: Quick reply options
+- **List Messages**: Menu navigation
+
+## Best Practices
+
+1. Always mark messages as read after processing
+2. Add delays between messages to avoid spam detection
+3. Keep message text under 4096 characters
+4. Use buttons for better UX
+5. Provide clear navigation options
+
+## WhatsApp Business API Setup
+
+1. Create a Meta Developer account
+2. Set up WhatsApp Business API
+3. Get your access token and phone number ID
+4. Configure webhooks
+5. Test with WhatsApp Business Test Numbers

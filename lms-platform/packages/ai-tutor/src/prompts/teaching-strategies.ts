@@ -102,13 +102,11 @@ Frame errors positively: "Errors are the computer helping you learn!"`;
 /**
  * Get appropriate teaching strategy based on context
  */
-export function getTeachingStrategy(
-  context: {
-    questionType?: 'concept' | 'debugging' | 'practice' | 'review';
-    studentStruggles?: boolean;
-    isNewConcept?: boolean;
-  }
-): string {
+export function getTeachingStrategy(context: {
+  questionType?: 'concept' | 'debugging' | 'practice' | 'review';
+  studentStruggles?: boolean;
+  isNewConcept?: boolean;
+}): string {
   const { questionType, studentStruggles, isNewConcept } = context;
 
   let strategies = [];

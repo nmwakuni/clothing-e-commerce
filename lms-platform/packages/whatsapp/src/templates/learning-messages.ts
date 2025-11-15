@@ -42,10 +42,7 @@ What would you like to do?`,
 /**
  * Course catalog message
  */
-export async function sendCourseCatalog(
-  whatsapp: WhatsAppService,
-  phoneNumber: string
-) {
+export async function sendCourseCatalog(whatsapp: WhatsAppService, phoneNumber: string) {
   return whatsapp.sendList(
     phoneNumber,
     `Here are our most popular courses 📚
@@ -104,7 +101,8 @@ export async function sendLessonProgress(
   lessonTitle: string,
   progress: number
 ) {
-  const progressBar = '▓'.repeat(Math.floor(progress / 10)) + '░'.repeat(10 - Math.floor(progress / 10));
+  const progressBar =
+    '▓'.repeat(Math.floor(progress / 10)) + '░'.repeat(10 - Math.floor(progress / 10));
 
   return whatsapp.sendText(
     phoneNumber,
@@ -114,7 +112,7 @@ ${lessonTitle}
 
 ${progressBar} ${progress}%
 
-${progress < 100 ? 'Keep going! You\'re doing great! 💪' : '🎉 Lesson completed! Ready for the next one?'}`
+${progress < 100 ? "Keep going! You're doing great! 💪" : '🎉 Lesson completed! Ready for the next one?'}`
   );
 }
 
@@ -190,7 +188,7 @@ Score: ${score}/${totalQuestions} (${percentage}%)
 ${
   passed
     ? 'Congratulations! You passed! 🎉\n\nYou can move on to the next lesson.'
-    : 'Keep practicing! You\'ll get it! 💪\n\nReview the material and try again.'
+    : "Keep practicing! You'll get it! 💪\n\nReview the material and try again."
 }`,
     passed
       ? [
@@ -322,7 +320,7 @@ No worries! Here's what you can do:`,
     ],
     {
       header: 'Error',
-      footer: 'We\'re here to help!',
+      footer: "We're here to help!",
     }
   );
 }

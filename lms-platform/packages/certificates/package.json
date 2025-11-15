@@ -1,7 +1,7 @@
 {
-  "name": "@lms/whatsapp",
+  "name": "@lms/certificates",
   "version": "1.0.0",
-  "description": "WhatsApp integration for learning delivery",
+  "description": "Certificate generation system for course completion",
   "main": "src/index.ts",
   "scripts": {
     "dev": "tsc --watch",
@@ -9,10 +9,13 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "axios": "^1.6.5"
+    "pdfkit": "^0.14.0",
+    "qrcode": "^1.5.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.5",
+    "@types/pdfkit": "^0.13.4",
+    "@types/qrcode": "^1.5.5",
     "typescript": "^5.3.3"
   }
 }
