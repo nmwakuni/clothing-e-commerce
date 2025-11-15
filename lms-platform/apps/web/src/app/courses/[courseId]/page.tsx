@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, Button, Badge, Progress, Avatar } from '@lms/ui';
+import { CourseReviews } from '@/components/course-reviews';
 import {
   Play,
   Clock,
@@ -108,33 +109,6 @@ const courseData = {
     },
   ],
 };
-
-const reviews = [
-  {
-    id: '1',
-    user: 'John Kamau',
-    rating: 5,
-    comment:
-      'Amazing course! Sarah explains everything so clearly. I went from zero coding knowledge to building my own websites in just 3 weeks.',
-    date: '2024-01-15',
-  },
-  {
-    id: '2',
-    user: 'Grace Wanjiku',
-    rating: 5,
-    comment:
-      'The WhatsApp integration is brilliant. I could learn during my commute. Best investment I made this year!',
-    date: '2024-01-10',
-  },
-  {
-    id: '3',
-    user: 'David Omondi',
-    rating: 4,
-    comment:
-      'Great content and practical exercises. The M-Pesa payment was super smooth. Highly recommend!',
-    date: '2024-01-05',
-  },
-];
 
 export default function CoursePage() {
   const params = useParams();
@@ -457,63 +431,12 @@ export default function CoursePage() {
             </Card>
 
             {/* Student Reviews */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Student Reviews</CardTitle>
-                <CardDescription>
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="flex items-center">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={`h-5 w-5 ${
-                            star <= Math.floor(courseData.stats.rating)
-                              ? 'fill-yellow-400 text-yellow-400'
-                              : 'text-gray-300'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="font-bold text-lg">{courseData.stats.rating}</span>
-                    <span className="text-gray-600">
-                      ({courseData.stats.reviews} reviews)
-                    </span>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {reviews.map((review) => (
-                    <div key={review.id} className="pb-6 border-b last:border-0">
-                      <div className="flex items-start gap-3 mb-3">
-                        <Avatar size="md" fallback={review.user} />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between mb-1">
-                            <h4 className="font-bold">{review.user}</h4>
-                            <span className="text-sm text-gray-500">
-                              {new Date(review.date).toLocaleDateString()}
-                            </span>
-                          </div>
-                          <div className="flex items-center mb-2">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star
-                                key={star}
-                                className={`h-4 w-4 ${
-                                  star <= review.rating
-                                    ? 'fill-yellow-400 text-yellow-400'
-                                    : 'text-gray-300'
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <p className="text-gray-700">{review.comment}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <CourseReviews
+              courseId={courseId}
+              averageRating={courseData.stats.rating}
+              totalReviews={courseData.stats.reviews}
+              enrolled={courseData.enrolled}
+            />
           </div>
 
           {/* Sidebar - Sticky on desktop (hidden on mobile as card is in hero) */}
