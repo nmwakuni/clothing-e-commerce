@@ -1,0 +1,21 @@
+{
+  "name": "@lms/auth",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Authentication system for LMS Platform",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "jose": "^5.9.6",
+    "nanoid": "^5.0.4",
+    "zod": "^3.24.1",
+    "@lms/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}
