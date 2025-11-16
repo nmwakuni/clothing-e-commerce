@@ -1,0 +1,19 @@
+{
+  "name": "@mtaa/news-aggregator",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.28.0",
+    "axios": "^1.6.5",
+    "cheerio": "^1.0.0-rc.12",
+    "date-fns": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}

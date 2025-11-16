@@ -1,0 +1,19 @@
+{
+  "name": "@lms/ai-tutor",
+  "version": "1.0.0",
+  "description": "AI-powered tutoring system with Claude and OpenAI",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.14.0",
+    "openai": "^4.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@mteja/database",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Database schema and ORM for Mteja",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/migrate.ts",
+    "db:studio": "drizzle-kit studio",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.36.4",
+    "@neondatabase/serverless": "^0.10.3",
+    "drizzle-kit": "^0.29.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.2"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "saas-innovation-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for innovative SaaS platforms targeting Africa",
+  "scripts": {
+    "dev": "pnpm --parallel --filter \"./lms-platform/**\" dev",
+    "dev:web": "pnpm --filter @lms/web dev",
+    "dev:api": "pnpm --filter @lms/api dev",
+    "build": "pnpm --recursive build",
+    "build:lms": "pnpm --filter \"./lms-platform/**\" build",
+    "lint": "pnpm --recursive lint",
+    "type-check": "pnpm --recursive type-check",
+    "clean": "pnpm --recursive exec rm -rf node_modules dist .next .turbo",
+    "db:generate": "pnpm --filter @lms/database db:generate",
+    "db:migrate": "pnpm --filter @lms/database db:migrate",
+    "db:seed": "pnpm --filter @lms/database db:seed",
+    "db:studio": "pnpm --filter @lms/database db:studio"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "prettier": "^3.4.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.1",
+    "@typescript-eslint/parser": "^8.18.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0"
+}

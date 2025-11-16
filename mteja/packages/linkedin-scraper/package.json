@@ -1,0 +1,22 @@
+{
+  "name": "@mteja/linkedin-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LinkedIn profile scraper for prospect research",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "puppeteer": "^23.10.4",
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.2",
+    "vitest": "^2.1.8"
+  }
+}

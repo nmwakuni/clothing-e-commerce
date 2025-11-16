@@ -1,0 +1,19 @@
+{
+  "name": "@lms/auth",
+  "version": "1.0.0",
+  "description": "Authentication with Better Auth and Google OAuth",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "better-auth": "^0.5.0",
+    "@better-auth/drizzle": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "typescript": "^5.3.3"
+  }
+}
