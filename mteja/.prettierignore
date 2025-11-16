@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+dist
+build
+.next
+.turbo
+*.tsbuildinfo
+
+# Testing
+coverage
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+.wrangler
+drizzle
