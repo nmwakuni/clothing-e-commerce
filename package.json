@@ -2,30 +2,19 @@
   "name": "saas-innovation-hub",
   "version": "1.0.0",
   "private": true,
-  "description": "Monorepo for innovative SaaS platforms targeting Africa",
+  "description": "Collection of independent SaaS platforms targeting Africa",
   "scripts": {
-    "dev": "pnpm --parallel dev",
-    "build": "pnpm --recursive build",
-    "test": "pnpm --recursive test",
-    "lint": "pnpm --recursive lint",
-    "type-check": "pnpm --recursive type-check",
-    "clean": "pnpm --recursive exec rm -rf node_modules dist .next .turbo",
-    "dev:lms": "pnpm --filter \"./lms-platform/**\" dev",
-    "dev:biashara": "pnpm --filter \"./whatsapp-commerce/**\" dev",
-    "dev:mteja": "pnpm --filter \"./mteja/**\" dev",
-    "build:lms": "pnpm --filter \"./lms-platform/**\" build",
-    "build:biashara": "pnpm --filter \"./whatsapp-commerce/**\" build",
-    "build:mteja": "pnpm --filter \"./mteja/**\" build"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.2",
-    "prettier": "^3.4.2",
-    "@typescript-eslint/eslint-plugin": "^8.18.1",
-    "@typescript-eslint/parser": "^8.18.1"
+    "install:all": "cd lms-platform && pnpm install && cd ../mental-health-bot && pnpm install && cd ../local-news-platform && pnpm install && cd ../whatsapp-commerce && pnpm install && cd ../mteja && pnpm install",
+    "clean:all": "rm -rf lms-platform/node_modules lms-platform/.next lms-platform/dist mental-health-bot/node_modules mental-health-bot/.next mental-health-bot/dist local-news-platform/node_modules local-news-platform/.next local-news-platform/dist whatsapp-commerce/node_modules whatsapp-commerce/.next whatsapp-commerce/dist whatsapp-commerce/.turbo mteja/node_modules mteja/.next mteja/dist mteja/.turbo",
+    "dev:lms": "cd lms-platform && pnpm dev",
+    "dev:biashara": "cd whatsapp-commerce && pnpm dev",
+    "dev:mteja": "cd mteja && pnpm dev",
+    "build:lms": "cd lms-platform && pnpm build",
+    "build:biashara": "cd whatsapp-commerce && pnpm build",
+    "build:mteja": "cd mteja && pnpm build"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
-  },
-  "packageManager": "pnpm@8.15.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
 }
