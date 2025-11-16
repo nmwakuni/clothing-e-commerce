@@ -4,18 +4,18 @@
   "private": true,
   "description": "Monorepo for innovative SaaS platforms targeting Africa",
   "scripts": {
-    "dev": "pnpm --parallel --filter \"./lms-platform/**\" dev",
-    "dev:web": "pnpm --filter @lms/web dev",
-    "dev:api": "pnpm --filter @lms/api dev",
+    "dev": "pnpm --parallel dev",
     "build": "pnpm --recursive build",
-    "build:lms": "pnpm --filter \"./lms-platform/**\" build",
+    "test": "pnpm --recursive test",
     "lint": "pnpm --recursive lint",
     "type-check": "pnpm --recursive type-check",
     "clean": "pnpm --recursive exec rm -rf node_modules dist .next .turbo",
-    "db:generate": "pnpm --filter @lms/database db:generate",
-    "db:migrate": "pnpm --filter @lms/database db:migrate",
-    "db:seed": "pnpm --filter @lms/database db:seed",
-    "db:studio": "pnpm --filter @lms/database db:studio"
+    "dev:lms": "pnpm --filter \"./lms-platform/**\" dev",
+    "dev:biashara": "pnpm --filter \"./whatsapp-commerce/**\" dev",
+    "dev:mteja": "pnpm --filter \"./mteja/**\" dev",
+    "build:lms": "pnpm --filter \"./lms-platform/**\" build",
+    "build:biashara": "pnpm --filter \"./whatsapp-commerce/**\" build",
+    "build:mteja": "pnpm --filter \"./mteja/**\" build"
   },
   "devDependencies": {
     "typescript": "^5.7.2",

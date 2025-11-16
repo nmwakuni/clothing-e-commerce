@@ -3,10 +3,18 @@ packages:
   - 'lms-platform/apps/*'
   - 'lms-platform/packages/*'
 
-  # Mental Health Bot (future)
+  # Mental Health Bot
   - 'mental-health-bot/apps/*'
   - 'mental-health-bot/packages/*'
 
-  # Local News Platform (future)
+  # Local News Platform
   - 'local-news-platform/apps/*'
   - 'local-news-platform/packages/*'
+
+  # Biashara - WhatsApp Commerce Platform
+  - 'whatsapp-commerce/apps/*'
+  - 'whatsapp-commerce/packages/*'
+
+  # Mteja - LinkedIn Client Acquisition Platform
+  - 'mteja/apps/*'
+  - 'mteja/packages/*'
